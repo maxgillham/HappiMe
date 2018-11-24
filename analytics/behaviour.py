@@ -18,9 +18,10 @@ def unusual_behaviour(data_set):
     #labels are what catagory emotion log fills, where -1 indicates no catagory
     #num labels indicates the number of catagories for emotion logs
     labels, num_labels = db_scan(numerical_data, 1.5, 5)
-    #find emot logs that have label -1
-    outliers = np.where(labels == -1)[0]
-    return data_set.loc[outliers]
+    #if most recent log is unusual
+    if labels[100] == -1: return True
+    else: return False
+
 
 def emotion_by_location(data_set):
     location_options = ['Home', 'Gym', 'Library', 'Class', 'Bar']
@@ -45,7 +46,12 @@ def emotion_by_location(data_set):
 
 if __name__ == '__main__':
     data_set = gen_mood(100)
-    weirdness = unusual_behaviour(data_set)
-    print(weirdness)
+    new_mood = 'Hella Sad'
+    new_location = 'Bar'
+    new_time = '09AM'
+    new_day = 100.0
+    data = data_set.append({'Mood': new_mood, 'Location': new_location, 'Time': new_time, 'Day': new_day}, ignore_index=True)
 
-    emotion_by_location(data_set)
+    print(unusual_behaviour(data))
+    
+    print(emotion_by_location(data))
