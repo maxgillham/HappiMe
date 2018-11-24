@@ -3,6 +3,8 @@ from flask_restful import Resource, Api
 import json
 from datetime import datetime as dt
 import requests as r
+from utils import *
+from behaviour import *
 
 app = Flask(__name__)
 json_data = open('patient0.json')
@@ -24,12 +26,13 @@ def add_data():
 
 @app.route('/unusual', methods=["POST"])
 def unusual():
+    data_set = gen_mood(100)
     data = request.get_json('data')
     loggedDate, loggedTime = get_time()
     new_mood = data['data']['mood']
     new_location = data['data']['location']
-
-    return 
+    data_new = data_set.append({'Mood': new_mood, 'Location': new_location, 'Time': loggedTime, 'Day': 100.0}, ignore_index=True)
+    return unusual_behaviour(data_new)
 
 
 def get_time():
