@@ -56,6 +56,11 @@ def gen_mood(days):
     
     return mood_data
 
+'''
+Dictionaries for analysis
+We require numerical values for clustering techniques, so here are invertble mappings
+for each data frame parameter to a integer.
+'''
 #Dictionary to map mood integers to strings
 mood_dict = {
     -2: "Hella Sad",
@@ -65,8 +70,34 @@ mood_dict = {
     2: "FUCK YES" 
 } 
 
-if __name__ == '__main__':
-    data = gen_mood(100)
-    print(data)
-    #for i in range(len(mood_time_series)): print(mood_dict[mood_time_series[i]])
-   
+#Location dictionary
+location_dict = {
+    "Home": 0,
+    "Gym": 1,
+    "Library": 2,
+    "Class": 3,
+    "Bar": 4
+}
+
+#Time Dictionary
+time_dict = {
+    "9am": -3,
+    "10am": -2,
+    "11am": -1,
+    "12pm": 0,
+    "1pm": 1,
+    "2pm": 2,
+    "3pm": 3,
+    "4pm": 4,
+    "5pm": 5,
+    "6pm": 6,
+    "7pm": 7,
+    "8pm": 8
+}
+
+#Inverted dictionary to map strings to integers
+mood_dict_inverted = {i: j for j, i in mood_dict.items()}
+location_dict_inverted = {i: j for j, i in location_dict.items()}
+time_dict_inverted = {i: j for j, i in time_dict.items()}
+
+
