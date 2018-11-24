@@ -1,23 +1,37 @@
 import numpy as np
-
+import pandas as pd
 
 
 '''
-Modelling daily mood by a 1 step Markov process, period 1 day 
+Daily mood is modelled by a 1 step Markov process, period 1 day 
+Location is modelled by a i.i.d process, distributed in favour of home, library, class, gym, bar
+Time is modelled by uniform i.i.d process over options
 Pass method number of days to generate data for
 '''
 def gen_mood(days):
     #mood options
-    mood_options = np.array([-2, -1, 0, 1, 2])
+    mood_options = [-2, -1, 0, 1, 2]
     #transition probabilities
     mood_transition = np.array([[0.4, 0.4, 0.2, 0.0, 0.0],
                                 [0.1, 0.4, 0.4, 0.1, 0.0],
                                 [0.0, 0.1, 0.6, 0.3, 0.0],
                                 [0.0, 0.0, 0.4, 0.4, 0.2],
                                 [0.0, 0.0, 0.2, 0.4, 0.4]])
+    #location options
+    location_options = ['Home', 'Gym', 'Library', 'Class', 'Bar']
+    #probablities for each option
+    location_probabilities = [0.4, 0.1, 0.2, 0.2, 0.1]
+    #time options
+    time_options = ['9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm']
+
 
     #time series list for moods 
     mood_time_series = []
+    #time series list for locations
+    location_time_series = []
+    #time series list for time of requests
+    request_time = []
+
     #init starting mood to be happy :) 
     current_mood = 4
 
@@ -27,9 +41,32 @@ def gen_mood(days):
         mood_time_series.append(np.random.choice(a=mood_options, p=mood_transition[current_mood]))
         #set current mood to be whatever state we just landed on
         current_mood = np.where(mood_options == mood_time_series[-1])[0][0]
+        #choose and append location
+        location_time_series.append(np.random.choice(a=location_options, p=location_probabilities))
+        #choose and apppend time of input
+        request_time.append(np.random.choice(a=time_options))
 
-    return mood_time_series
+
+    mood_data = pd.DataFrame(
+        {'Day': range(days),
+         'Mood': mood_time_series,
+         'Time': request_time,
+         'Location': location_time_series
+        }).replace({'Mood': mood_dict})
+    
+    return mood_data
+
+#Dictionary to map mood integers to strings
+mood_dict = {
+    -2: "Hella Sad",
+    -1: "Sad",
+    0: "Neutral",
+    1: "Happy",
+    2: "FUCK YES" 
+} 
 
 if __name__ == '__main__':
-    mood_time_series = gen_mood(100)
-    print(mood_time_series)
+    data = gen_mood(100)
+    print(data)
+    #for i in range(len(mood_time_series)): print(mood_dict[mood_time_series[i]])
+   
