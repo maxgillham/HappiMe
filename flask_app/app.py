@@ -13,10 +13,10 @@ def get_data():
 
 @app.route('/add', methods=["POST"])
 def add_data():
-    loggedTime = dt.now().strftime("%Y_%m_%d_%H:%M")
+    loggedDate= dt.now().strftime("%Y_%m_%d")
+    loggedTime= dt.now().strftime("%H:%M")
     data = request.get_json('data')
-    print(data)
-    patient0[loggedTime] = {'mood':data['data']['mood'], 'location':data['data']['location']}
+    patient0[loggedDate][loggedTime] = {'mood':data['data']['mood'], 'location':data['data']['location']}
     with open('patient0.json', 'w+') as f:
         json.dump(patient0, f, sort_keys=True, indent=4)
     return jsonify(patient0)
