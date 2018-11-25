@@ -42,3 +42,18 @@ def emotion_by_location(data_set):
 
     return avg_home, avg_gym, avg_lib, avg_class, avg_bar
 
+
+def emotion_by_time(data_set):
+    time_options = ['09AM', '10AM', '11AM', '12PM', '01PM', '02PM', '03PM', '04PM', '05PM', '06PM', '07PM', '08PM']
+    data_set = data_set.replace({'Mood': mood_dict_inverted})
+
+    nine_am_values = data_set.loc[data_set['Time'] == '09AM']['Mood'].values
+    avgs = []
+    for time in time_options:
+        blah = data_set.loc[data_set['Time'] == time]['Mood'].values
+        avgs.append(round(np.mean(blah),2))
+    return avgs
+
+if __name__ == '__main__':
+    data_set = load_history()
+    print(emotion_by_time(data_set))
