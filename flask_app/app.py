@@ -26,7 +26,7 @@ def add_data():
 
 @app.route('/unusual', methods=["POST"])
 def unusual():
-    data_set = gen_mood(100)
+    data_set = load_history()
     data = request.get_json('data')
     loggedDate, loggedTime = get_time()
     new_mood = data['data']['mood']
@@ -36,7 +36,7 @@ def unusual():
 
 @app.route('/avg_emotion_location', methods=["POST"])
 def avg_emotion_location():
-    data_set = gen_mood(100)
+    data_set = load_history()
     data = request.get_json('data')
     loggedDate, loggedTime = get_time()
     new_mood = data['data']['mood']
