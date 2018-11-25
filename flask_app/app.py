@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from flask_restful import Resource, Api
 import json
 from datetime import datetime as dt
@@ -31,8 +31,10 @@ def unusual():
     loggedDate, loggedTime = get_time()
     new_mood = data['data']['mood']
     new_location = data['data']['location']
-    data_new = data_set.append({'Mood': new_mood, 'Location': new_location, 'Time': loggedTime, 'Day': 100.0}, ignore_index=True)
-    return str(unusual_behaviour(data_new))
+    data_new = data_set.append({'Mood': new_mood, 'Location': new_location, 'Time': "09AM", 'Day': 100.0}, ignore_index=True)
+    is_unusual = str(unusual_behaviour(data_new))
+    print("Is_Unusual: " + is_unusual + ", New Mood: " + new_mood + ", New Location: " + new_location)
+    return jsonify({"is_unusual": is_unusual})
 
 @app.route('/avg_emotion_location', methods=["POST"])
 def avg_emotion_location():

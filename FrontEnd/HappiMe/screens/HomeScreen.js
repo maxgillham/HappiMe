@@ -38,7 +38,28 @@ export default class HomeScreen extends React.Component {
       </View>
 
         <TouchableOpacity
-          onPress={() => {this.props.navigation.navigate('Locations')}}
+          onPress={() => {this.props.navigation.navigate('Locations', {
+            mood: "FUCK YES"
+          })}}
+        > 
+          <View style={{
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            borderRadius: 20, 
+            height: 50, 
+            width: 300, 
+            backgroundColor: "#FFFFFF",
+            borderColor: "#4B88A2",
+            borderWidth: 1,
+            marginBottom: 15}}>
+            <Text style={{color: "#4B88A2", fontWeight: "bold"}}>Very Happy</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => {this.props.navigation.navigate('Locations', {
+            mood: "Happy"
+          })}}
         > 
           <View style={{
             alignItems: 'center', 
@@ -55,7 +76,9 @@ export default class HomeScreen extends React.Component {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => {this.props.navigation.navigate('Locations')}}
+          onPress={() => {this.props.navigation.navigate('Locations', {
+            mood: "Neutral"
+          })}}
         >
           <View style={{
             alignItems: 'center', 
@@ -72,7 +95,9 @@ export default class HomeScreen extends React.Component {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => {this.props.navigation.navigate('Locations')}}
+          onPress={() => {this.props.navigation.navigate('Locations', {
+            mood: "Sad"
+          })}}
         >
           <View style={{
             alignItems: 'center', 
@@ -85,6 +110,25 @@ export default class HomeScreen extends React.Component {
             borderWidth: 1,
             marginBottom: 15}}>
             <Text style={{color: "#4B88A2", fontWeight: "bold"}}>Sad</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => {this.props.navigation.navigate('Locations', {
+            mood: "Hella Sad"
+          })}}
+        >
+          <View style={{
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            borderRadius: 20, 
+            height: 50, 
+            width: 300, 
+            backgroundColor: "#FFFFFF",
+            borderColor: "#4B88A2",
+            borderWidth: 1,
+            marginBottom: 15}}>
+            <Text style={{color: "#4B88A2", fontWeight: "bold"}}>Very Sad</Text>
           </View>
         </TouchableOpacity>
       </View>

@@ -7,10 +7,12 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import LocationScreen from '../screens/LocationScreen';
+import ResultScreen from '../screens/ResultScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
   Locations: LocationScreen,
+  Results: ResultScreen,
 });
 
 HomeStack.navigationOptions = {
@@ -55,8 +57,10 @@ SettingsStack.navigationOptions = {
   ),
 };
 
-export default createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-});
+export default HomeStack;
+
+// export default createBottomTabNavigator({
+//   HomeStack,
+//   LinksStack,
+//   SettingsStack,
+// });

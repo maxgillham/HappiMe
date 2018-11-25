@@ -22,7 +22,7 @@ def gen_mood(days):
     #probablities for each option
     location_probabilities = [0.4, 0.1, 0.2, 0.2, 0.1]
     #time options
-    time_options = ['09AM', '10AM', '11AM', '12PM', '01PM', '02PM', '03PM', '04PM', '05PM', '06PM', '07PM', '08PM']
+    time_options = ['09AM', '10AM', '11AM', '12PM', '01PM', '02PM', '03PM', '04PM', '05PM', '06PM', '07PM', '08PM', '09PM', '10PM', '11PM']
 
 
     #time series list for moods 
@@ -92,7 +92,10 @@ time_dict = {
     "05PM": 5,
     "06PM": 6,
     "07PM": 7,
-    "08PM": 8
+    "08PM": 8,
+    "09PM": 9,
+    "10PM": 10,
+    "11PM": 11,
 }
 
 #Inverted dictionary to map strings to integers

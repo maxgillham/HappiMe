@@ -17,8 +17,53 @@ export default class LocationScreen extends React.Component {
     title: null,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.postUnusual = this.postUnusual.bind(this);
+
+  }
+
+  postUnusual(data) {
+
+    let setup = {
+      method: 'POST',
+      body: JSON.stringify({
+        data: data
+      }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }
+
+    fetch('http://localhost:5000/unusual', setup)
+    .then(response => response.json())
+    .then(responseData => {
+      
+      console.log(responseData['is_unusual'] == "True");
+
+      if (responseData['is_unusual'] == "True") {
+        this.props.navigation.navigate('Results', {
+          is_unusual: "True"
+        });
+      } else {
+        this.props.navigation.navigate('Results', {
+          is_unusual: "False"
+        });
+      }
+
+    });
+
+  }
+
   render() {
+
+    const {navigation} = this.props;
+    const mood = navigation.getParam('mood');
+
     return (
+
       <View style={styles.container}>
 
       <View style={{
@@ -31,7 +76,17 @@ export default class LocationScreen extends React.Component {
       </View>
 
         <TouchableOpacity
-          onPress={() => {this.props.navigation.navigate('Locations')}}
+          onPress={() => {
+            
+            var location = "Home";
+            let data = {
+              mood: mood,
+              location: location
+            };
+            
+            this.postUnusual(data);
+
+          }}
         > 
           <View style={{
             alignItems: 'center', 
@@ -48,7 +103,17 @@ export default class LocationScreen extends React.Component {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => {this.props.navigation.navigate('Locations')}}
+            onPress={() => {
+    
+              var location = "Gym";
+              let data = {
+                mood: mood,
+                location: location
+              };
+              
+              this.postUnusual(data);
+  
+            }}
         >
           <View style={{
             alignItems: 'center', 
@@ -65,7 +130,17 @@ export default class LocationScreen extends React.Component {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => {this.props.navigation.navigate('Locations')}}
+          onPress={() => {
+
+            var location = "Class";
+            let data = {
+              mood: mood,
+              location: location
+            };
+            
+            this.postUnusual(data);
+
+          }}
         >
           <View style={{
             alignItems: 'center', 
@@ -81,7 +156,17 @@ export default class LocationScreen extends React.Component {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {this.props.navigation.navigate('Locations')}}
+            onPress={() => {
+
+              var location = "Library";
+              let data = {
+                mood: mood,
+                location: location
+              };
+              
+              this.postUnusual(data);
+  
+            }}
         >
           <View style={{
             alignItems: 'center', 
@@ -97,7 +182,17 @@ export default class LocationScreen extends React.Component {
           </View>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {this.props.navigation.navigate('Locations')}}
+          onPress={() => {
+
+            var location = "Bar";
+            let data = {
+              mood: mood,
+              location: location
+            };
+            
+            this.postUnusual(data);
+
+          }}
         >
           <View style={{
             alignItems: 'center', 
