@@ -34,6 +34,18 @@ def unusual():
     data_new = data_set.append({'Mood': new_mood, 'Location': new_location, 'Time': loggedTime, 'Day': 100.0}, ignore_index=True)
     return str(unusual_behaviour(data_new))
 
+@app.route('/avg_emotion_location', methods=["POST"])
+def avg_emotion_location():
+    data_set = gen_mood(100)
+    data = request.get_json('data')
+    loggedDate, loggedTime = get_time()
+    new_mood = data['data']['mood']
+    new_location = data['data']['location']
+    data_new = data_set.append({'Mood': new_mood, 'Location': new_location, 'Time': loggedTime, 'Day': 100.0}, ignore_index=True)
+    avg_home, avg_gym, avg_lib, avg_class, avg_bar = emotion_by_location(data_set = data_new)
+    output = json.dumps({'Avg @ Home': avg_home, 'Avg @ Gym': avg_home, 'Avg @ Lib': avg_lib, 'Avg @ Class': avg_class, 'Avg @ Bar': avg_bar})
+    return output
+
 
 def get_time():
     return dt.now().strftime("%Y_%m_%d"), dt.now().strftime("%I%p")
