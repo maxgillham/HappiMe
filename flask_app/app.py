@@ -60,6 +60,10 @@ def get_time():
 def home():
     return render_template('index.html')
 
+def avg_emotion_time():
+    data_set = load_history()
+    return emotion_by_time(data_set)
+
 
 
 
