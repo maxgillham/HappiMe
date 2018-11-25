@@ -19,16 +19,51 @@ export default class ResultScreen extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.sendTextMessage = this.sendTextMessage.bind(this);
   }
+
+    sendTextMessage(data) {
+
+        let setup = {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }
+
+        fetch('https://utils.lib.id/sms@1.0.9/', setup)
+        .then(response => response.json())
+        .then(responseData => {
+
+            console.log(responseData);
+
+            if (responseData['status'] == "sent") {
+                
+            } else {
+                Alert.alert("Something went wrong.");
+            }
+
+        });
+
+    }
 
   render() {
 
     const {navigation} = this.props;
     const is_unusual = navigation.getParam('is_unusual');
 
-    console.log(is_unusual);
-
     if (is_unusual == "True") {
+
+        var data = {
+            "to": "5192164264",
+            "body": "Look's like your friend Jonathan is feeling down, you should send a message."
+        }
+
+        this.sendTextMessage(data);
+
         return (
             <View style={{
                 flex: 1,
@@ -39,6 +74,7 @@ export default class ResultScreen extends React.Component {
             }}>
                 <Text style={{color: "#FFFFFF", fontSize: 24, fontWeight: "bold"}}> Look's like something's unusual.</Text>
                 <Text style={{color: "#FFFFFF", fontSize: 24, fontWeight: "bold"}}> Want us to help out? </Text>
+
             </View>
         );
     }
