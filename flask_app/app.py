@@ -1,10 +1,14 @@
-from flask import Flask, request, jsonify, Response
+from flask import *
 from flask_restful import Resource, Api
 import json
 from datetime import datetime as dt
 import requests as r
 from utils import *
 from behaviour import *
+import io
+import random
+import matplotlib.pyplot as plt
+
 
 app = Flask(__name__)
 json_data = open('patient0.json')
@@ -51,6 +55,13 @@ def avg_emotion_location():
 
 def get_time():
     return dt.now().strftime("%Y_%m_%d"), dt.now().strftime("%I%p")
+
+@app.route('/home')
+def home():
+    return render_template('index.html')
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
