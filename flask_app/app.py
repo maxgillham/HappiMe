@@ -32,7 +32,7 @@ def unusual():
     new_mood = data['data']['mood']
     new_location = data['data']['location']
     data_new = data_set.append({'Mood': new_mood, 'Location': new_location, 'Time': loggedTime, 'Day': 100.0}, ignore_index=True)
-    return unusual_behaviour(data_new)
+    return str(unusual_behaviour(data_new))
 
 
 def get_time():
