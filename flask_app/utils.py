@@ -101,3 +101,6 @@ location_dict_inverted = {i: j for j, i in location_dict.items()}
 time_dict_inverted = {i: j for j, i in time_dict.items()}
 
 
+#load sample data previously generated
+def load_history():
+    return pd.read_pickle('file_name')
